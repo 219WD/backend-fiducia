@@ -1,25 +1,25 @@
 const express = require('express');
 const mongoose = require("mongoose");
-const cors = require('cors');
+const cors = require('cors'); // Importar cors
 require("dotenv").config();
 const userRoutes = require("./routes/user");
-const productRoutes = require("./routes/product")
+const productRoutes = require("./routes/product");
 
 const app = express();
 const port = process.env.PORT || 9000;
+
+// Middleware para permitir solicitudes CORS desde cualquier origen
+app.use(cors());
 
 //middlewares
 app.use(express.json());
 app.use('/api', userRoutes);
 app.use('/api', productRoutes);
 
-// Middleware para permitir solicitudes CORS desde cualquier origen
-app.use(cors());
-
 //Routes
 app.get('/', (req, res) => {
     res.send("Bienvenido a la API")
-})
+});
 
 //Mongodb connection
 mongoose.connect(process.env.MONGODB_URI).then(()=>console.log('Connected to MongoDB Atlas'))
