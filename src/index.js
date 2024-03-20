@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require("mongoose");
+const cors = require('cors');
 require("dotenv").config();
 const userRoutes = require("./routes/user");
 const productRoutes = require("./routes/product")
@@ -11,6 +12,9 @@ const port = process.env.PORT || 9000;
 app.use(express.json());
 app.use('/api', userRoutes);
 app.use('/api', productRoutes);
+
+// Middleware para permitir solicitudes CORS desde cualquier origen
+app.use(cors());
 
 //Routes
 app.get('/', (req, res) => {
