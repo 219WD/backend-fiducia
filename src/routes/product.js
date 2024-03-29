@@ -50,10 +50,11 @@ router.put('/products/:id', (req, res) => {
 //Eliminar un producto
 router.delete('/products/:id', (req, res) => {
     const { id } = req.params;
+    console.log("",id);
     productSchema
         .deleteOne({ _id: id })
-        .then((data) => res.json(data))
-        .catch((error) => res.json({ message: error }));
+        .then((data) => res.status(200).json(data))
+        .catch((error) => res.status(400).json({ message: error }));
 });
 
 

@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require("mongoose");
+const morgan = require("morgan");
 const cors = require('cors'); // Importar cors
 require("dotenv").config();
 const userRoutes = require("./routes/user");
@@ -10,6 +11,7 @@ const port = process.env.PORT || 9000;
 
 // Middleware para permitir solicitudes CORS desde cualquier origen
 app.use(cors());
+app.use(morgan("dev"));
 
 //middlewares
 app.use(express.json());
@@ -26,3 +28,4 @@ mongoose.connect(process.env.MONGODB_URI).then(()=>console.log('Connected to Mon
 .catch((error) => console.error(error));
 
 app.listen(port, () => console.log('server en el puerto', port));
+
